@@ -1,41 +1,47 @@
-# Configurações essenciais do projeto
+# Configurações Essenciais do Projeto
 
-## Passo Um
+Este guia fornece os passos necessários para configurar o Blob Storage na Azure e rodar o projeto. Siga cada passo para garantir que tudo esteja configurado corretamente.
 
-Criar o serviço do Blob Storage no seu portal da azure https://portal.azure.com/#home
+## Passo 1: Criar o Serviço do Blob Storage
 
-## Passo Dois
+1. Acesse o [portal da Azure](https://portal.azure.com/#home).
+2. Crie um novo serviço de Blob Storage conforme necessário.
 
-Dentro da visualização dos dados do seu container para o Blob, acessar o menu de Configurações > Resource Sharing (CORS)
+## Passo 2: Configurar o CORS para o Blob Storage
 
-Ao acessar o menu de configuração do CORS, criar um novo acesso com o padrão
-Allowed Origins : *
-Allowed Method : GET, POST
-Allowed Headers : *
-Exposed Headers : *
-Max Age : 3600
+1. Dentro da visualização dos dados do seu container para o Blob, vá para o menu **Configurações** > **Resource Sharing (CORS)**.
+2. Adicione uma nova configuração com os seguintes padrões:
+   - **Allowed Origins**: `*`
+   - **Allowed Methods**: `GET, POST`
+   - **Allowed Headers**: `*`
+   - **Exposed Headers**: `*`
+   - **Max Age**: `3600`
 
-## Passo Três
+## Passo 3: Criar um Token de Acesso
 
-Ao configurar o CORS do seu serviço, acessar o menu Security + Networking para criar um token de acesso
+1. Acesse o menu **Security + Networking** para criar um token de acesso.
+2. Configure a chave de acesso:
+   - Ajuste o nível de acesso conforme o tipo de recurso (**Allowed Resource Types**).
+   - Defina uma data de expiração para a chave de acesso.
+   - Permita o protocolo HTTP (**Allowed Protocols**).
+3. Gere a nova chave.
 
-Ao acessar o menu para criar uma chave de acesso, alterar o nível de acesso de acordo com o tipo de recurso (Allowed Resource Types),
-definir uma data de expiração da chave de acesso e permitir o tipo de protocolo para HTTP (Allowed Protocols).
+## Passo 4: Alimentar as Informações no Arquivo de Configuração
 
-Configurado os itens acima, gerar a nova chave.
+1. Com o serviço do Blob Storage criado e configurado, insira as informações no arquivo `src/ConfigAzure/keys.js`.
 
-## Passo Quatro
+## Passo 5: Rodar a Aplicação do JSON Server
 
-Com o serviço do Blob Storage criado e configurado, alimentar as informações no arquivo src > ConfigAzure > keys.js
+1. Navegue até o diretório do servidor com os seguintes comandos no terminal:
+```sh
+  cd src
+  cd Server
+  npx json-server --watch db.json --port 3333
+```
 
-## Passo Cinco
+## Passo 6: Rodar o Projeto React
 
-Rodar a aplicação do json server, colocando os seguintes comandos no terminal
-
-cd src
-cd Server
-npx json-server -w db.json --port 3333
-
-## Passo Seis
-
-Rodar o projeto React com o comando 'npm start' no terminal
+No diretório raiz do projeto, inicie o servidor de desenvolvimento do React com o comando
+```sh
+npm start
+```
