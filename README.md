@@ -1,70 +1,41 @@
-# Getting Started with Create React App
+# Configurações essenciais do projeto
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Passo Um
 
-## Available Scripts
+Criar o serviço do Blob Storage no seu portal da azure https://portal.azure.com/#home
 
-In the project directory, you can run:
+## Passo Dois
 
-### `npm start`
+Dentro da visualização dos dados do seu container para o Blob, acessar o menu de Configurações > Resource Sharing (CORS)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Ao acessar o menu de configuração do CORS, criar um novo acesso com o padrão
+Allowed Origins : *
+Allowed Method : GET, POST
+Allowed Headers : *
+Exposed Headers : *
+Max Age : 3600
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Passo Três
 
-### `npm test`
+Ao configurar o CORS do seu serviço, acessar o menu Security + Networking para criar um token de acesso
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Ao acessar o menu para criar uma chave de acesso, alterar o nível de acesso de acordo com o tipo de recurso (Allowed Resource Types),
+definir uma data de expiração da chave de acesso e permitir o tipo de protocolo para HTTP (Allowed Protocols).
 
-### `npm run build`
+Configurado os itens acima, gerar a nova chave.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Passo Quatro
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Com o serviço do Blob Storage criado e configurado, alimentar as informações no arquivo src > ConfigAzure > keys.js
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Passo Cinco
 
-### `npm run eject`
+Rodar a aplicação do json server, colocando os seguintes comandos no terminal
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+cd src
+cd Server
+npx json-server -w db.json --port 3333
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Passo Seis
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Rodar o projeto React com o comando 'npm start' no terminal
